@@ -1,23 +1,7 @@
-import fastify from 'fastify';
-import cors from '@fastify/cors';
-import 'dotenv/config';
+import fastify from 'fastify'
+import { routes } from './http/routes/index.js'
 
 const app = fastify();
 
-async function server(){
-    app.register(cors,{
-        origin: true,
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization']
-    })
-
-
-    app.listen({
-        host:'0.0.0.0',
-        port: process.env.PORT
-    }).then(() => {
-        console.log('HTTP Server is running on PORT' + process.env.PORT);
-    })
-}
-
-server();
+app.register(routes);
+export {app}
